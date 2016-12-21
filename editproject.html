@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <base target="_top">
+    <?!= include('style'); ?>
+    <?!= include('scripts'); ?>
+   </head>
+
+  <body>
+    
+    <div class="container">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        
+            <div id="page1">
+                <h1 align="center" style="font-size: 6rem"> Create a Project </h1>
+                <div align="center">
+                    <br/>
+                    <p> By creating a project you agree that: </p>
+                    <ul>
+                        <li> It is original </li>
+                        <li> It is legal </li>
+                        <li> You are a teen </li>
+                    </ul>
+                    <br/>
+                    <button class="btn btn-success" onclick="goToPage2()"> Let's Rock </button>
+                </div>
+            </div>
+            
+            <div id="page2">
+                <h1 align="center" style="font-size: 6rem"> Project Info </h1>
+                <div align="center">
+                
+                    <br/>
+                    <form>
+                    Project Name: <input id="projectName" required/> <br/>
+                    Location:  <input id="projectLocation" required/> <br/>
+                    Category: 
+                    <select id="category" value="0" required>
+                    <option value="Apps">Apps</option>
+                    <option value="Websites">Websites</option>
+                    <option value="Games">Games</option>
+                    <option value="Devices">Devices</option>
+                    <option value="VR/AR">VR/AR</option>
+                    </select>
+                    <br/>
+                    
+                    Current State: 
+                    <select id="status" value="0" required>
+                    <option value="Ideation">Ideation</option>
+                    <option value="Prototyping">Prototyping</option>
+                    <option value="In Development">In Development</option>
+                    <option value="Released">Released</option>
+                    </select>
+                    <br/>
+                    <br/>
+                    
+                    Website:  <input id="website" placeholder="N/A"/> <br/>
+                    Facebook:  <input id="facebook" placeholder="N/A"/> <br/>
+                    Twitter:  <input id="twitter" placeholder="N/A"/> <br/>
+                    Google+:  <input id="google" placeholder="N/A"/> <br/>
+                    Github:  <input id="github" placeholder="N/A"/> <br/><br/>
+                    
+                    Summarise your project in 440 characters or less! This will be shown to people as they browse. 
+                    <br/> <textarea class="form-control" rows="5" id="summary" maxlength="440" required></textarea>
+                    <br/>
+                    
+                    Write a full descripton of your project. 
+                    <br/> <textarea class="form-control" rows="5" id="description" required></textarea>
+                    <br/>
+                    
+                    Add some tags to your project (separate with commas, max 30 chars)
+                    <input id="tags" maxLength="30" required/><br/><br/>
+                    
+                    Upload an image of your project (this will be shown to people as they browse)
+                    <input id="photopicker" type="file" class="inputfile inputfile-6" accept="image/*" required/>
+                    <br/>
+                                      
+                    
+                    <button type="submit" class="btn btn-success" onclick="goToPage3()"> Next </button>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+        
+         <div id="page3">
+         
+         <h1 align="center" style="font-size: 6rem"> What Do You Need? </h1>
+         <div align="center">
+                    <div id="help-checkboxes">
+                    <p> <b> Technical </b> </p>
+                     <input type="checkbox" id="checkbox" name="Web Dev"> Web Development <br/>
+                     <input type="checkbox" id="checkbox" name="Mobile Dev"> Mobile Development <br/>
+                     <input type="checkbox" id="checkbox" name="Desktop Dev"> Desktop Development <br/>
+                     <input type="checkbox" id="checkbox" name="Game Dev"> Game Development <br/>
+                     <input type="checkbox" id="checkbox" name="AI"> AI Development <br/>
+                     <input type="checkbox" id="checkbox" name="Cloud Dev"> Cloud Development <br/>
+                     <input type="checkbox" id="checkbox" name="VR"> VR Development <br/>
+                     <input type="checkbox" id="checkbox" name="AR"> AR Development <br/><br/>
+                     
+                    <p> <b> Business and Marketing </b> </p>  
+                     <input type="checkbox" id="checkbox" name="Digital Marketing"> <span data-balloon="Promoting your business through digital channels" data-balloon-pos="right"> Digital Marketing </span> <br/>
+                     <input type="checkbox" id="checkbox" name="Growth Hacking"> <span data-balloon="Speedily testing out marketing channels" data-balloon-pos="right"> Growth Hacking </span> <br/>
+                     <input type="checkbox" id="checkbox" name="Pitching"> Pitching <br/>
+                     <input type="checkbox" id="checkbox" name="Business"> Business <br/><br/>
+                    
+                    <p> <b> Creative </b> </p>  
+                     <input type="checkbox" id="checkbox" name="Graphics Design"> Graphics Design <br/>
+                     <input type="checkbox" id="checkbox" name="Music"> Music <br/>
+                     <input type="checkbox" id="checkbox" name="UI"> <span data-balloon="Fine-tuning how your product looks" data-balloon-pos="right"> UI Design </span> <br/>
+                     <input type="checkbox" id="checkbox" name="UX"> <span data-balloon="Making your product easy to use" data-balloon-pos="right"> UX Design </span> <br/>
+                    </div>
+                    <br/>
+                    <button class="btn btn-danger" onclick="goToPage2()"> Back </button>
+                    <button class="btn btn-success" onclick="submitForm()"> Submit </button>
+                    
+        </div>
+            
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    
+    <script>
+        
+        
+        
+        $("button").click(function(event){
+        event.preventDefault();
+        });
+        
+       function goToPage2(e){
+
+         $("#page1").fadeOut("fast", function(){ $("#page2").fadeIn("fast") });
+         $("#page3").fadeOut("fast", function(){ $("#page2").fadeIn("fast") });
+       }
+       
+       function goToPage3(e){
+
+        if ($("input#projectName").val() == "" || $("input#projectLocation").val() == "" || $("textarea#summary").val() == "" || $("textarea#description").val() == "" || $("input#tags").val() == "" ||  $("select#category").val() == "" ||  $("select#status").val() == ""){}
+        else{
+         $("#page2").fadeOut("fast", function(){ $("#page3").fadeIn("fast") });
+        }
+       }
+       
+       function submitForm(){
+       
+           photoFile = $('#photopicker')[0].files[0];
+           photoReader.readAsDataURL(photoFile);
+       
+       }
+        
+       $( document ).ready(function() {
+          $(".container").hide();
+          $("#page2").hide(); 
+          $("#page3").hide(); 
+          google.script.run.withSuccessHandler(cookieOK).checkUserKey(Cookies.get('key'));
+       });
+       
+       function cookieOK (e){
+          if (e.toString() != "valid"){
+            location.replace("https://script.google.com/macros/s/AKfycbypp9M9Oe_n6Eu5UdzLEvgd-61shbO4GNBt05uwaChetdMlBWvn/exec");
+          }
+          else
+          {
+            $(".container").show();
+          }
+       }
+       
+       //Uploady Stuff
+       
+       var photoReader = new FileReader();
+       var photoData, photoFile; 
+       
+       function doSubmit(){
+       
+
+         //Some pre-processing
+         var selected = [];
+         var needsHelpWith = "";
+         $('#help-checkboxes input:checked').each(function() {
+            selected.push($(this).attr('name'));
+         });
+
+         needsHelpWith = selected.join(", ");
+       
+         //Do the upload
+         google.script.run.withSuccessHandler(submitSuccessful).createProject(
+         $("input#projectName").val(),
+         Cookies.get('key'),
+         $("input#projectLocation").val(),
+         $("select#category").val(), 
+         $("select#status").val(), 
+         $("textarea#summary").val(), 
+         $("textarea#description").val(), 
+         photoData,
+         photoFile.name,
+         needsHelpWith,
+         $("input#tags").val(),     
+         $("input#website").val(),  
+         $("input#facebook").val(),  
+         $("input#twitter").val(),  
+         $("input#google").val(),  
+         $("input#github").val());
+        
+         //Show loader
+         $(".container").html('<div class="loading-spinner">  <div class="dot dotOne"></div>  <div class="dot dotTwo"></div>  <div class="dot dotThree"></div></div>');
+       
+        
+       }
+       
+       function submitSuccessful(e){
+          if (e == "success"){        
+          $(".container").html("Success!");
+          }
+          else
+          {
+          $(".container").html("Dang Nabbit! Something went wrong!");
+          }
+       }
+
+       photoReader.onloadend = function (e) {
+       //Start uploading once this is done
+        photoData = e.target.result;     
+        doSubmit();
+       };
+       
+    </script>
+    
+
+    
+  </body>
+</html>
+
+

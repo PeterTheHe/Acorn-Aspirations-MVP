@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <?!= include('style'); ?>
+  </head>
+  <body>
+  <div class="remodal-bg">
+     <?!= include('header'); ?>
+    <div class="container" align="center">
+    <hr>
+    <h1> Login </h1>
+
+    <p> Enter your email address and we'll send you a code to make sure it's you! </p>
+    <br>
+    <div id="request">
+    <input type="email" id="email" />
+    <button id="submitEmail"> Let's Rock!</button><br/>
+    <br>
+    <input type="checkbox" id="keepLoggedIn" checked> Keep me signed in for 7 days (on by default or else site won't work - can undo by clearing cookies)
+    </div>
+       
+    <div id="login">
+    <input type="email" id="code" />
+    <button id="submitCode"> Continue</button>
+    </div>
+    
+    <p><a data-remodal-target="modal">Help</a></p>
+   
+    
+    <br/><br/>
+    <br/><br/>
+     
+     <p> Put together in 24 hours by Peter "I know absolutely nothing about web development" He        [<a onclick="openTimelapse()"> Timelapse </a>]</p>
+    
+    </div>
+    
+    </div><!-- /remodal-bg -->
+    
+    <div class="remodal" data-remodal-id="modal">
+  <button data-remodal-action="close" class="remodal-close"></button>
+  <h1>Help</h1>
+  <p>
+    Welcome to the Acorn CodeFriends Alpha. To use this platform you must have been registered. To join please email:
+    <code>acornaspirationssite@gmail.com</code><br /></p>
+    
+
+  <br>
+  <button data-remodal-action="cancel" class="button">Close</button>
+</div>
+    
+    
+    <?!= include('scripts'); ?>
+    <script>    
+       
+       var keepLoggedIn = false;
+       var email = "";
+    
+       $( document ).ready(function() {
+          $("#login").hide();
+          google.script.run.withSuccessHandler(cookieOK).checkUserKey(Cookies.get('key'));
+       });
+       
+       function cookieOK (e){
+          if (e.toString() == "valid"){
+            location.replace("https://script.google.com/macros/s/AKfycbypp9M9Oe_n6Eu5UdzLEvgd-61shbO4GNBt05uwaChetdMlBWvn/exec?key=" + Cookies.get('key').trim());
+          }
+       }
+    
+       $("#submitEmail").click(function (e){
+          if ($("#email").val() == "") { return };
+          e.preventDefault();
+          
+          email = $("#email").val();
+          keepLoggedIn = $("#keepLoggedIn")[0].checked;
+
+          //Send an email
+          google.script.run.withSuccessHandler(success).sendAuthEmail($("#email").val());
+          $("#request").html('<div class="loading-spinner">  <div class="dot dotOne"></div>  <div class="dot dotTwo"></div>  <div class="dot dotThree"></div></div>');
+          
+       });
+       
+       $("#submitCode").click(function (e){
+          var code = $("#code").val();
+          if (code == "") { return };
+          
+          //Create a cookie if we want to stay logged in
+          if (keepLoggedIn){
+            google.script.run.withSuccessHandler(createCookie).createPersistentKeyLogin(code, email);
+          }
+          else
+          {        
+            e.preventDefault();
+            location.replace("https://script.google.com/macros/s/AKfycbypp9M9Oe_n6Eu5UdzLEvgd-61shbO4GNBt05uwaChetdMlBWvn/exec?key=" + $("#code").val().trim());
+          }
+          
+      
+       });       
+       
+       function createCookie (e){
+
+          //Create the cookie
+          var key = e.toString();
+          Cookies.set('key', key , { expires: 7 });
+          
+          //Redirect
+          location.replace("https://script.google.com/macros/s/AKfycbypp9M9Oe_n6Eu5UdzLEvgd-61shbO4GNBt05uwaChetdMlBWvn/exec?key=" + $("#code").val().trim());
+       }
+       
+       function success(e){
+         $("#request").html(e.toString());
+         if (!e.toString().includes("unauthorised")){
+           $("#inputs").hide();
+           $("#login").show();
+         }
+       }
+       
+       function openTimelapse(){
+           window.open("https://www.youtube.com/watch?v=J56yQcacLug");
+       }
+    </script>
+    
+  </body>
+</html>
+
+

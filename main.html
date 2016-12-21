@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <?!= include('style'); ?>
+</head>
+
+<body>
+    <div class="remodal-bg">
+    
+
+        <div class="container">
+        <h1 style="font-size: 6rem"> Projects </h1>
+        <h4 align="right"> Welcome, <span id="username">  </span> </h4>
+        <h5 align="right"> <span id="manage-account" onclick="manageAccount()"> Manage Account </span> | <span id="log-out" onclick="logOut()"> Log Out </span> </h5>
+        <hr>
+
+ 
+
+            <?   var sheetName = "Projects";
+                 var file, files = DriveApp.getFilesByName(sheetName); //Retrieve the ID
+
+     //Check if the doc exists. If it doesn't, return nothing
+     if (files.hasNext ()){
+         file = files.next(); 
+      } else {
+         return "";
+      }
+
+       var data = SpreadsheetApp.openById(file.getId()).getActiveSheet().getDataRange().getValues(); ?>
+
+                <? for (var i = 1; i < data.length; i++) { ?>
+                
+                <div class="col-md-4">
+                   <div class="project-card" data-remodal-target="project-<?= i ?>">
+                     <div  style="background-image:url(&quot;<?= data[i][12]?>&quot;)" class="card-picture"></div>
+                     <div class="project-body">
+                      <h4> <?= data[i][1] ?> </h4>
+                      <h5> <?= data[i][3] ?> | <?= data[i][7] ?> <?= (data[i][7] == "1")? "Collaborator" : "Collaborators" ?>  </h5>
+                      <p> <?= data[i][4] ?> </p>
+                     </div>
+                     <div class="project-footer">
+                      <p class="project-location"> <i class="fa fa-globe" aria-hidden="true"></i> <?= data[i][13] ?> 
+                      <span align="right" class="project-tags"> <i class="fa fa-tags" aria-hidden="true"></i> <?= data[i][14] ?> </span></p>
+                      <p class="project-skills"> <i class="fa fa-cogs" aria-hidden="true"></i> <?= data[i][6] ?> </p>
+                     </div>
+                   </div>
+                </div>
+
+                <? } ?>
+
+        </div>
+           
+    </div>
+    
+
+    <!-- /remodal-bg -->
+    <!-- Start Modals -->
+    <? for (var i = 1; i < data.length; i++) { 
+           var colour = "green"; var button_text = "Accept";  
+    ?>
+
+        <!-- Info Modal -->
+
+        <div class="remodal" data-remodal-id="project-<?= i ?>">
+            <button data-remodal-action="close" class="remodal-close"></button>
+            <h1>
+                <?= data[i][1] ?>
+            </h1>
+            <a href="<?= data[i][11] ?>"> <h3> <?= data[i][11] ?> </h3> </a>
+            <p> <?= data[i][5] ?> </p>
+            <div class="social-buttons">
+               <? if(data[i][15] != "" && data[i][15] != "N/A") { ?> <a class="social-button facebook" href=" <?= data[i][15] ?>"><i class="fa fa-facebook"></i> <? } ?>
+               <? if(data[i][16] != "" && data[i][16] != "N/A") { ?> </a><a class="social-button twitter" href=" <?= data[i][16] ?>"><i class="fa fa-twitter"></i></a> <? } ?>
+               <? if(data[i][17] != "" && data[i][17] != "N/A") { ?><a class="social-button google" href=" <?= data[i][17] ?>"><i class="fa fa-google"></i></a> <? } ?>
+               <? if(data[i][18] != "" && data[i][18] != "N/A") { ?><a class="social-button github" href=" <?= data[i][18] ?>"><i class="fa fa-github"></i></a> <? } ?>
+            </div>
+            <br><br>
+            <button data-project-action="contact" data-remodal-target="project-email-<?= i ?>" class="button">Contact Creator</button>
+        </div>
+
+        <!-- Email Modal -->
+
+        <div class="remodal" data-remodal-id="project-email-<?= i ?>">
+            <div id="project-email-<?!= i ?>">
+            <button data-remodal-action="close" class="remodal-close"></button>
+            <h1> Email the Creator </h1><br/>
+            Preferred Correspondence Email: <input type="email" id="preferedMentorEmail<?=i?>"/><br/>
+            Message: <textarea class="form-control" rows="5" id="contactBody<?=i?>"></textarea>
+            <input type="checkbox" value="" id="mentorAgreed<?=i?>"> I agree that I won't do anything <a href="http://criminal.findlaw.com/criminal-charges/view-all-criminal-charges.html"> stupid </a>.
+            <br><button id="sendMessage<?=i?>" class="btn btn-danger" onclick="contactCreatorEmail<?!=i?>()"> Let's Rock </button>
+            </div>
+        </div>
+
+
+        <? } ?>
+            <!-- End apps script loop -->
+
+            <?!= include('scripts'); ?>
+            
+            <? for (var i = 1; i < data.length; i++) { ?>
+            
+            <script>    
+            
+            function contactCreatorEmail<?!= i?> (){
+              if ($("#mentorAgreed<?!= i ?>")[0].checked && $("#preferedMentorEmail<?!=i?>").length != 0 && $("#preferedMentorEmail<?!=i?>").val().includes("@") && $("#contactBody<?!=i?>").length != 0){
+                 google.script.run.withSuccessHandler(emailSent<?!= i ?>).emailCreator(<?!= data[i][0] ?>, $("#preferedMentorEmail<?!=i?>").val(), $("#contactBody<?!=i?>").val());
+                 $("#project-email-<?!= i ?>").html('<div class="loading-spinner">  <div class="dot dotOne"></div>  <div class="dot dotTwo"></div>  <div class="dot dotThree"></div></div>');
+              }
+            }
+            
+            function emailSent<?!= i ?>(result){
+              var message = "Dang Nabbit! There was an error!";
+              if (result == "success"){
+                message = "The message was sent successfully!";
+              }
+              $("#project-email-<?!= i ?>").html(message);
+            }
+            
+            </script>
+            
+            <? } ?>
+
+</body>
+
+</html>

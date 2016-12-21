@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <?!= include('style'); ?>
+    <?!= include('scripts'); ?>
+  </head>
+  <body>
+    <div class="remodal-bg">
+
+    <div class="container">
+        <hr>
+        <h1>Your Projects</h1>
+        
+        <h5> <span style="color: #F08700" onclick="AddProject()"> Add Project </span>   |  <span onclick="GoBack()"> Go Back </span> </h5>
+      
+  <table style="width:100%" id="projects-table">
+  <thead>
+  <tr>
+    <th>Project</th>
+    <th>Collaborators</th>
+  </tr>
+  </thead>
+  
+  <div id="loader"></div>
+  <tbody id="rows">
+    
+   
+    
+  </tbody>
+  </table>
+  <hr>
+        
+     
+    </div>
+    </div><!-- /remodal-bg -->
+    
+     <!-- Start Modals -->
+         
+    
+
+
+    <div id="modals"> </div>
+
+
+
+
+
+      
+
+     <script> 
+
+      $("#loader").html('<div class="loading-spinner">  <div class="dot dotOne"></div>  <div class="dot dotTwo"></div>  <div class="dot dotThree"></div></div>');
+      google.script.run.withSuccessHandler(populateTable).getProjectsByUser(Cookies.get('key'));
+    
+    //populate table
+    function populateTable (data){
+    
+      $("#loader").html('');
+       
+      var table = $('#projects-table').DataTable();
+      for (var i = 0; i < data.length; i++){
+         var collaborators = "<input type=\"number\" id=\"collaborators" + data[i][0] + "\" min=\"0\">" +
+         "<button onclick=\"google.script.run.withSuccessHandler(SuccessfulCollabUpdate).updateCollaborators('"
+         + data[i][0] + 
+         "', $('#collaborators" + data[i][0] + "').val(), '"+  Cookies.get('key') +"');\"> Change  </button>";
+         table.row.add([data[i][1], collaborators]);
+      }
+
+      $("#modals").html(modals);
+      
+      table.draw();
+
+        
+      for (var i = 0; i < data.length; i++){
+        $("#collaborators" + data[i][0]).val(data[i][2]);
+      }
+    }
+    
+    function SuccessfulCollabUpdate(e){
+       //TODO: Show a message or something
+    }
+
+    function AddProject(){
+       window.open("https://script.google.com/macros/s/AKfycbypp9M9Oe_n6Eu5UdzLEvgd-61shbO4GNBt05uwaChetdMlBWvn/exec?key=" + Cookies.get('key') + "&createproject=1", '_blank');
+    }
+    
+     function GoBack(){
+        window.open("https://script.google.com/macros/s/AKfycbypp9M9Oe_n6Eu5UdzLEvgd-61shbO4GNBt05uwaChetdMlBWvn/exec?key=" + Cookies.get('key') );
+    }
+    
+    
+    
+   </script>
+ 
+ 
+ 
+  </body>
+</html>
+

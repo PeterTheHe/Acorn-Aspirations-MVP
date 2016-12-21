@@ -1,0 +1,457 @@
+<!-- External CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remodal/1.1.0/remodal.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remodal/1.1.0/remodal-default-theme.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link href="https://fonts.googleapis.com/css?family=Average+Sans" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.4.0/balloon.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<style>
+
+body, html {
+ margin: 0;
+ padding: 0;
+ font-family: 'Average Sans', sans-serif;
+}
+
+.container {
+ max-width: 1200px;
+}
+
+.header {
+ width: 100%;
+ background: #cc0000;
+ margin: 0 auto;
+}
+
+.header img {
+ display: block;
+ margin: 0 auto;
+ height: 200px;
+}
+
+a {
+ text-decoration: none;
+ cursor: pointer;
+}
+
+/* DataTables */
+
+table {
+ border-collapse: collapse;
+}
+
+.dataTables_length, .dataTables_filter {
+ width: 50%;
+ display: inline-block;
+}
+
+.clickable-row {
+ cursor: pointer;
+}
+
+.dataTables_paginate a {
+ margin-right: 6px;
+ cursor: pointer;
+}
+
+
+
+tr,tr:hover {
+ transition: 0.3s all ease-in-out;
+}
+
+tbody > tr:hover {
+ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+
+
+/* Typography */
+
+h1 {
+ font-size: 3rem;
+}
+
+.remodal h3 {
+ font-size: 1.8rem;
+}
+
+.remodal h4 {
+ font-size: 2.4rem;
+}
+
+.remodal {
+backface-visibility: hidden;
+
+}
+
+
+
+/* Buttons */
+
+.button-green {
+ background-color: #43A047; 
+ color: white;
+}
+
+.button-red {
+ background-color: #F44336;
+ color:white;
+}
+
+/* Project Cards */
+.project-card {
+    position: relative;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border: 1px solid #d5c4d4;
+    padding: 20px;
+    margin-bottom: 60px;
+    height: 550px;
+}
+
+.project-card h4 {
+    color: #320f23;
+    text-transform: uppercase;
+    overflow: hidden;
+    margin-top: 0
+}
+
+.project-card .card-picture {
+    position: relative;
+    margin: -20px -20px 20px;
+    background-position: center;
+    background-size: cover;
+    height: 220px;
+    border-bottom: 1px solid #d5c4d4
+}
+
+.project-card h5 {
+    color: #00A6A6;
+    overflow: hidden;
+    height: 16px;
+    text-transform: inherit
+}
+
+.project-card .project-body {
+    height: 240px;
+}
+
+.project-card .project-location {
+    color: #F08700;
+    overflow: hidden;
+    top: 10px;
+    text-transform: inherit
+}
+
+.project-card .project-tags {
+    color: #F49F0A;
+    overflow: hidden;
+    top: 10px;
+    float: right;
+    text-transform: inherit;
+    display: inline;
+}
+
+.project-card .project-skills {
+    color: #EFCA08;
+    overflow: hidden;
+    height: 16px;
+    top: 10px;
+    text-transform: inherit;
+    display: inline;
+}
+
+
+/* Social Buttons - Stolen from https://codepen.io/chrisdothtml/pen/azPYqq */
+/* Reset */
+
+.social-buttons {
+  height: 90px;
+  margin: auto;
+  font-size: 0;
+  text-align: center;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.social-button {
+  display: inline-block;
+  background-color: #fff;
+  width: 90px;
+  height: 90px;
+  line-height: 90px;
+  margin: 0 10px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  opacity: .99;
+  border-radius: 28%;
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.05);
+  -webkit-transition: all 0.35s cubic-bezier(0.31, -0.105, 0.43, 1.59);
+  transition: all 0.35s cubic-bezier(0.31, -0.105, 0.43, 1.59);
+}
+.social-button:before {
+  content: '';
+  background-color: #000;
+  width: 120%;
+  height: 120%;
+  position: absolute;
+  top: 90%;
+  left: -110%;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  -webkit-transition: all 0.35s cubic-bezier(0.31, -0.105, 0.43, 1.59);
+  transition: all 0.35s cubic-bezier(0.31, -0.105, 0.43, 1.59);
+}
+.social-button .fa {
+  font-size: 38px;
+  vertical-align: middle;
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+  -webkit-transition: all 0.35s cubic-bezier(0.31, -0.105, 0.43, 1.59);
+  transition: all 0.35s cubic-bezier(0.31, -0.105, 0.43, 1.59);
+}
+.social-button.facebook:before {
+  background-color: #3B5998;
+}
+.social-button.facebook .fa {
+  color: #3B5998;
+}
+.social-button.twitter:before {
+  background-color: #3CF;
+}
+.social-button.twitter .fa {
+  color: #3CF;
+}
+.social-button.google:before {
+  background-color: #DC4A38;
+}
+.social-button.google .fa {
+  color: #DC4A38;
+}
+.social-button.github:before {
+  background-color: #000000;
+}
+.social-button.github .fa {
+  color: #000000;
+}
+.social-button.skype:before {
+  background-color: #00AFF0;
+}
+.social-button.skype .fa {
+  color: #00AFF0;
+}
+.social-button:focus:before, .social-button:hover:before {
+  top: -10%;
+  left: -10%;
+}
+.social-button:focus .fa, .social-button:hover .fa {
+  color: #fff;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+/* Spinners - stolen from https://codepen.io/cmslewis/pen/vosDj*/
+.loading-spinner {
+  position : absolute;
+  top      : 50%;
+  left     : 50%;
+  -webkit-transform : translateX(-50%) translateY(-50%);
+     -moz-transform : translateX(-50%) translateY(-50%);
+          transform : translateX(-50%) translateY(-50%);
+}
+
+.dot {
+  background    : black;
+  border-radius : 100%;
+  color         : white;
+  height        : 8px;
+  line-height   : 8px;
+  text-align    : center;
+  width         : 8px;
+}
+
+.dotOne {
+  -webkit-animation : dotOneKeyframes 5s ease  infinite;
+  background        : #67bce6;
+  position          : absolute;
+  top               : 0;
+  left              : 0;
+}
+
+.dotTwo {
+  -webkit-animation : dotTwoKeyframes 5s ease 0.4166666666666s infinite;
+  background        : #67bce6;
+  position          : absolute;
+  top               : 0;
+  left              : 14px;
+}
+
+.dotThree {
+  -webkit-animation : dotThreeKeyframes 5s ease 0.83333333333s infinite;
+  background        : #67bce6;
+  position          : absolute;
+  top               : 14px;
+  left              : 14px;
+}
+
+@-webkit-keyframes dotOneKeyframes {
+  0% {
+    top  : 0;
+    left : 0;
+  }
+  8.3333333333% {
+    top  : 14px;
+    left : 0;
+  }
+  16.6666666666% {
+    
+  }
+  25% {
+    top  : 14px;
+    left : 0;
+  }
+  33.3333333333% {
+    top  : 14px;
+    left : 14px;
+  }
+  41.6666666666% {
+    
+  }
+  50% {
+    top  : 14px;
+    left : 14px;
+  }
+  58.3333333333% {
+    top  : 0;
+    left : 14px;
+  }
+  66.6666666666% {
+    
+  }
+  75% {
+    top  : 0;
+    left : 14px;
+  }
+  83.3333333333% {
+    top  : 0;
+    left : 0;
+  }
+  91.6666666666% {
+    
+  }
+  100% {
+    
+  }
+}
+
+
+@-webkit-keyframes dotTwoKeyframes {
+  0% {
+    top  : 0;
+    left : 14px;
+  }
+  8.3333333333% {
+    top  : 0;
+    left : 0;
+  }
+  16.6666666666% {
+    
+  }
+  25% {
+    top  : 0;
+    left : 0;
+  }
+  33.3333333333% {
+    top  : 14px;
+    left : 0;
+  }
+  41.6666666666% {
+    
+  }
+  50% {
+    top  : 14px;
+    left : 0;
+  }
+  58.3333333333% {
+    top  : 14px;
+    left : 14px;
+  }
+  66.6666666666% {
+    
+  }
+  75% {
+    top  : 14px;
+    left : 14px;
+  }
+  83.3333333333% {
+    top  : 0;
+    left : 14px;
+  }
+  91.6666666666% {
+    
+  }
+  100% {
+    
+  }
+}
+
+@-webkit-keyframes dotThreeKeyframes {
+  0% {
+    top  : 14px;
+    left : 14px;
+  }
+  8.3333333333% {
+    top  : 0;
+    left : 14px;
+  }
+  16.6666666666% {
+    
+  }
+  25% {
+    top  : 0;
+    left : 14px;
+  }
+  33.3333333333% {
+    top  : 0;
+    left : 0;
+  }
+  41.6666666666% {
+    
+  }
+  50% {
+    top  : 0;
+    left : 0;
+  }
+  58.3333333333% {
+    top  : 14px;
+    left : 0;
+  }
+  66.6666666666% {
+    
+  }
+  75% {
+    top  : 14px;
+    left : 0;
+  }
+  83.3333333333% {
+    top  : 14px;
+    left : 14px;
+  }
+  91.6666666666% {
+    
+  }
+  100% {
+    
+  }
+}
+
+</style>
