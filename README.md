@@ -24,3 +24,6 @@ _I need to get over Tom._
 __Why Google Apps Script?__
 
 _It was the laziest backend I could think of. Literally - all the databases are on spreadsheets and all emails are sent seamlessly via the Gmail integration._
+
+__Why is the timelapse music a MIDI?__
+I Googled instrumental. I was tipsy - I couldn't tell the difference.
