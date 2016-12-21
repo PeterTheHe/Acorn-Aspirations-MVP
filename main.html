@@ -71,10 +71,10 @@
             <a href="<?= data[i][11] ?>"> <h3> <?= data[i][11] ?> </h3> </a>
             <p> <?= data[i][5] ?> </p>
             <div class="social-buttons">
-               <? if(data[i][15] != "" && data[i][15] != "N/A") { ?> <a class="social-button facebook" href=" <?= data[i][15] ?>"><i class="fa fa-facebook"></i> <? } ?>
-               <? if(data[i][16] != "" && data[i][16] != "N/A") { ?> </a><a class="social-button twitter" href=" <?= data[i][16] ?>"><i class="fa fa-twitter"></i></a> <? } ?>
-               <? if(data[i][17] != "" && data[i][17] != "N/A") { ?><a class="social-button google" href=" <?= data[i][17] ?>"><i class="fa fa-google"></i></a> <? } ?>
-               <? if(data[i][18] != "" && data[i][18] != "N/A") { ?><a class="social-button github" href=" <?= data[i][18] ?>"><i class="fa fa-github"></i></a> <? } ?>
+               <? if(data[i][15] != "" && data[i][15] != "N/A") { ?> <a class="social-button facebook" href=" <?= data[i][15] ?>" target="_blank"><i class="fa fa-facebook"></i> <? } ?>
+               <? if(data[i][16] != "" && data[i][16] != "N/A") { ?> </a><a class="social-button twitter" href=" <?= data[i][16] ?>" target="_blank"><i class="fa fa-twitter"></i></a> <? } ?>
+               <? if(data[i][17] != "" && data[i][17] != "N/A") { ?><a class="social-button google" href=" <?= data[i][17] ?>" target="_blank"><i class="fa fa-google"></i></a> <? } ?>
+               <? if(data[i][18] != "" && data[i][18] != "N/A") { ?><a class="social-button github" href=" <?= data[i][18] ?>" target="_blank"><i class="fa fa-github"></i></a> <? } ?>
             </div>
             <br><br>
             <button data-project-action="contact" data-remodal-target="project-email-<?= i ?>" class="button">Contact Creator</button>
